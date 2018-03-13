@@ -1,12 +1,8 @@
-@extends('layouts.app')
+@extends('combinaison.base')
 
-@section('sidebar')
-  @foreach($pages as $page)
-  {{ $page }}
-  @endforeach
-@endsection
+@section('title', 'Edition')
 
-@section('content')
+@section('combinaison_content')
 <form action="#" method="post">
   @csrf
   <div class="form-group">
@@ -27,11 +23,7 @@
   </div>
   <div class="form-group">
     <label for="page">Page</label>
-    <select class="" name="page">
-      @foreach($pages as $page)
-      <option>{{ $page }}</option>
-      @endforeach
-    </select>
+    <input class="form-control" type="text" name="page" value="{{$combinaison->page}}">
   </div>
   <div class="form-group">
     <input class="btn btn-success" type="submit" value="Valider">

@@ -12,13 +12,23 @@ class CombinaisonController extends Controller
   public function __construc(){
     $this->middleware('auth');
   }
-  public function index(){
-    $user = Auth::user();
-    $combinaisons = $user->combinaisons;
+
+
+
+  public function index(Request $request){
+    $query  = Combinaison::where('user_id',Auth::id());
+    
+    if ($page = $request->input('page'))
+      $query->where('page', $page);
+
     return view('combinaison.index', [
-      "combinaisons"=> $combinaisons
+      "combinaisons"=> $query->get(),
+      "pages" => Combinaison::getDistinctPage()
     ]);
   }
+
+
+
   public function edit(Request $request ,$id = null){
     if ($id) {
       if(!$combinaison = Combinaison::find($id))
@@ -44,6 +54,10 @@ class CombinaisonController extends Controller
       ]);
     }
   }
+
+
+
+
   public function remove($id){
     Combinaison::destroy($id);
     return redirect()->route('combinaison.index');
