@@ -13,7 +13,7 @@
             <option>{{ $page }}</option>
           @endforeach
         </select>
-        <button type="submit" name="" class="btn btn-dark">Filtrer</button>
+        <button type="submit" name="" class="btn btn-info">Filtrer</button>
       </div>
     </form>
   </div>
@@ -39,13 +39,13 @@
             <td class="password_field" data-value="{{$combinaison->password}}">***************</td>
             <td> <a href="{{$combinaison->url}}" target="_blank">{{$combinaison->url}}</a> </td>
             <td>{{$combinaison->page}}</td>
-            <td><a class="btn btn-dark" href="{{Route('combinaison.edit',['id' => $combinaison->id])}}">Modifier</a>
+            <td><a class="btn btn-info" href="{{Route('combinaison.edit',['id' => $combinaison->id])}}">Modifier</a>
               <a class="btn btn-danger" href="{{Route('combinaison.remove',['id' => $combinaison->id])}}">Supprimer</a></td>
             </tr>
           @endforeach
         </tbody>
       </table>
-      <a class="btn btn-dark" href="{{Route('combinaison.edit')}}">Ajouter</a>
+      <a class="btn btn-info" href="{{Route('combinaison.edit')}}">Ajouter</a>
   </div>
 </div>
 @endsection

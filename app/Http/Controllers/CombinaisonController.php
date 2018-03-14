@@ -17,12 +17,22 @@ class CombinaisonController extends Controller
 
   public function index(Request $request){
     $query  = Combinaison::where('user_id',Auth::id());
-    
+
     if ($page = $request->input('page'))
       $query->where('page', $page);
 
+    $combinaisons = $query->get();
+    //Décodage des mots de passe
+    foreach ($combinaisons as $combinaison) {
+      try {
+        $combinaison->password = decrypt($combinaison->password);
+      } catch (DecryptException $e) {
+
+      }
+    }
+
     return view('combinaison.index', [
-      "combinaisons"=> $query->get(),
+      "combinaisons"=> $combinaisons,
       "pages" => Combinaison::getDistinctPage()
     ]);
   }
@@ -40,7 +50,7 @@ class CombinaisonController extends Controller
     if ($request->isMethod('post')) {
       $combinaison->libelle = $request->input('libelle');
       $combinaison->identifiant = $request->input('identifiant');
-      $combinaison->password = $request->input('password');
+      $combinaison->password = encrypt($request->input('password'));
       $combinaison->url = $request->input('url');
       $combinaison->page = $request->input('page');
       $combinaison->user()->associate(Auth::user());
@@ -48,6 +58,9 @@ class CombinaisonController extends Controller
       return redirect()->route('combinaison.index');
     }
     else {
+      if($combinaison->password){
+        $combinaison->password = decrypt($combinaison->password);
+      }
       return view('combinaison.edit', [
         "combinaison" => $combinaison,
         "pages" => Combinaison::getDistinctPage()

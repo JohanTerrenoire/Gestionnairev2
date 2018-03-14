@@ -19,6 +19,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::view('/generateur', 'generateur')->name('generateur');
+
 Route::prefix('combinaison')->group(function(){
   Route::match(["post", "get"],'/', 'CombinaisonController@index')->name('combinaison.index');
   Route::match(["post", "get"], "/edit/{id?}", "CombinaisonController@edit")->name('combinaison.edit');
