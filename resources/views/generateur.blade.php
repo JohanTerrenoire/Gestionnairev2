@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Générateur')
+
 @section('content')
 <div class="form-group">
   <input type="checkbox" id="chk_maj">

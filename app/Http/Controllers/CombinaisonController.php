@@ -75,4 +75,5 @@ class CombinaisonController extends Controller
     Combinaison::destroy($id);
     return redirect()->route('combinaison.index');
   }
+
 }

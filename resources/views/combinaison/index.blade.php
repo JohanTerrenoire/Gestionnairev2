@@ -23,8 +23,8 @@
     <table class="table">
       <thead class="thead-dark">
         <tr>
-          <th>libelle</th>
-          <th>identifiant</th>
+          <th>Libellé</th>
+          <th>Identifiant</th>
           <th>Mot de passe</th>
           <th>URL</th>
           <th>Catégorie</th>

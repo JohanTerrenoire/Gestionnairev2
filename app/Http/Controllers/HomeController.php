@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+  protected $redirectTo = '/home';
     /**
      * Create a new controller instance.
      *
@@ -23,6 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        // return view('home');
+        $this->redirectTo = route('combinaison.index');
+        $this->middleware('guest')->except('logout');
     }
 }
