@@ -17,9 +17,16 @@ class LiaisonController extends Controller
       $query = Liaison::where('mail_partenaire', $user->email);
       $liaisons = $query->get();
       $combinaisons = [];
+      //Récupération des combinaisons dans la table de liaison
       foreach ($liaisons as $liaison) {
         $combinaisons[] = Combinaison::find($liaison->combinaison_id);
       }
+      //Décryptage des mots de passe
+      foreach ($combinaisons as $combinaison) {
+        $combinaison->password = decrypt($combinaison->password);
+        $combinaison->isEditable = $combinaison->getLiaisonForUser(Auth::user())->isEditable;
+      }
+
       return view('partage',[
         'combinaisons' => $combinaisons
       ]);

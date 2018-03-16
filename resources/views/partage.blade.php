@@ -25,13 +25,43 @@
               <td class="password_field" data-value="{{$combinaison->password}}">***************</td>
               <td> <a href="{{$combinaison->url}}" target="_blank">{{$combinaison->url}}</a> </td>
               <td>{{$combinaison->page}}</td>
-              <td><a class="btn btn-info" href="{{Route('combinaison.edit',['id' => $combinaison->id])}}">Modifier</a>
-                <a class="btn btn-danger" href="{{Route('combinaison.remove',['id' => $combinaison->id])}}">Supprimer</a></td>
-              <td>{{$combinaison->user_id}}</td>
-              </tr>
+              @if ($combinaison->isEditable)
+                <td><a class="btn btn-info" href="{{Route('combinaison.edit',['id' => $combinaison->id])}}">Modifier</a></td>
+              @else
+                <td></td>
+              @endif
+              <td>{{$combinaison->user->name}}</td>
+            </tr>
             @endforeach
         </tbody>
       </table>
     </div>
   </div>
+@endsection
+
+@section('scripts')
+  <!--Script pour les actions de la souris sur le champ mot de passe-->
+  <script type="text/javascript">
+    $('.password_field').mouseover(function(){
+      var $this = $(this);
+      $this.text($this.data('value'));
+    })
+    .mouseleave(function() {
+      var $this = $(this);
+      $this.text("***************")
+    })
+    .click(function() {
+      var $this = $(this);
+      $this.select();
+      document.execCommand('copy');
+    });
+  </script>
+  <!--Script pour le clique sur le champs identifiant-->
+  <script type="text/javascript">
+    $('.identifiant_field').click(function(){
+      var $this = $(this);
+      $this.select();
+      document.execCommand('copy');
+    });
+  </script>
 @endsection

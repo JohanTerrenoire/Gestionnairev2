@@ -24,11 +24,7 @@ class CombinaisonController extends Controller
     $combinaisons = $query->get();
     //Décodage des mots de passe
     foreach ($combinaisons as $combinaison) {
-      try {
-        $combinaison->password = decrypt($combinaison->password);
-      } catch (DecryptException $e) {
-
-      }
+      $combinaison->password = decrypt($combinaison->password);
     }
 
     return view('combinaison.index', [
@@ -44,8 +40,10 @@ class CombinaisonController extends Controller
       if(!$combinaison = Combinaison::find($id))
         throw new \Exception("La combinaison n'existe pas.", 1);
     }
-    else
+    else{
       $combinaison = new Combinaison();
+      $combinaison->user()->associate(Auth::user());
+    }
 
     if ($request->isMethod('post')) {
       $combinaison->libelle = $request->input('libelle');
@@ -53,7 +51,6 @@ class CombinaisonController extends Controller
       $combinaison->password = encrypt($request->input('password'));
       $combinaison->url = $request->input('url');
       $combinaison->page = $request->input('page');
-      $combinaison->user()->associate(Auth::user());
       $combinaison->save();
       return redirect()->route('combinaison.index');
     }
