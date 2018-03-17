@@ -14,9 +14,9 @@ class Combinaison extends Model
       return $this->hasMany('App\Liaison', 'combinaison_id');
     }
 
-    public static function getDistinctPage(){
+    public static function getDistinctPage($id){
       $pages = [];
-      foreach (DB::table('combinaisons')->select('page')->distinct()->get() as $key => $value) {
+      foreach (DB::table('combinaisons')->select('page')->where('id','=',$id)->distinct()->get() as $key => $value) {
         $pages[] = $value->page;
       }
       return $pages;

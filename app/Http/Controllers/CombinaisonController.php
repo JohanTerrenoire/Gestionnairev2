@@ -17,7 +17,7 @@ class CombinaisonController extends Controller
 
   public function index(Request $request){
     $query  = Combinaison::where('user_id',Auth::id());
-
+    $user = Auth::user();
     if ($page = $request->input('page'))
       $query->where('page', $page);
 
@@ -29,7 +29,7 @@ class CombinaisonController extends Controller
 
     return view('combinaison.index', [
       "combinaisons"=> $combinaisons,
-      "pages" => Combinaison::getDistinctPage()
+      "pages" => Combinaison::getDistinctPage($user->id)
     ]);
   }
 

@@ -19,12 +19,14 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::view('/generateur', 'generateur')->name('generateur');
+Route::view('/generateur', 'generateur')->name('generateur')->middleware('auth');
 
-Route::get('/partage', 'LiaisonController@getPartage')->name('partage');
+Route::get('/partage', 'LiaisonController@getPartage')->name('partage')->middleware('auth');
 
 Route::prefix('combinaison')->group(function(){
-  Route::match(["post", "get"],'/', 'CombinaisonController@index')->name('combinaison.index');
-  Route::match(["post", "get"], "/edit/{id?}", "CombinaisonController@edit")->name('combinaison.edit');
-  Route::get('/delete/{id}', 'CombinaisonController@remove')->name('combinaison.remove');
+  Route::match(["post", "get"],'/', 'CombinaisonController@index')->name('combinaison.index')->middleware('auth');
+  Route::match(["post", "get"], "/edit/{id?}", "CombinaisonController@edit")->name('combinaison.edit')->middleware('auth');
+  Route::get('/delete/{id}', 'CombinaisonController@remove')->name('combinaison.remove')->middleware('auth');
 });
+// Lors de la modification que la combinaison appartient à l'utilisateur courant
+// Récupérer les catégories de l'utilisateur uniquement

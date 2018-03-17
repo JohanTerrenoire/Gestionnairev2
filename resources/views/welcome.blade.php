@@ -78,10 +78,10 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
-                    <img src="{{ asset('img/Cadenas.png')}}" alt="Cadenas" >
-                    {{ config('app.name', 'Laravel') }}
-                </div>
+              <div class="title m-b-md">
+                  <img src="{{ asset('img/Cadenas.png')}}" alt="Cadenas" >
+                  {{ config('app.name', 'Laravel') }}
+              </div>
             </div>
         </div>
     </body>
