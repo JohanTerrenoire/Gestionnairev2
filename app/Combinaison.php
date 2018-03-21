@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class Combinaison extends Model
 {
@@ -14,9 +15,9 @@ class Combinaison extends Model
       return $this->hasMany('App\Liaison', 'combinaison_id');
     }
 
-    public static function getDistinctPage($id){
+    public static function getDistinctPage(){
       $pages = [];
-      foreach (DB::table('combinaisons')->select('page')->where('id','=',$id)->distinct()->get() as $key => $value) {
+      foreach (DB::table('combinaisons')->select('page')->where('user_id','=',Auth::id())->distinct()->get() as $key => $value) {
         $pages[] = $value->page;
       }
       return $pages;

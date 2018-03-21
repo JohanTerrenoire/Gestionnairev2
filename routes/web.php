@@ -28,5 +28,5 @@ Route::prefix('combinaison')->group(function(){
   Route::match(["post", "get"], "/edit/{id?}", "CombinaisonController@edit")->name('combinaison.edit')->middleware('auth');
   Route::get('/delete/{id}', 'CombinaisonController@remove')->name('combinaison.remove')->middleware('auth');
 });
-// Lors de la modification que la combinaison appartient à l'utilisateur courant
+// Lors de la modification, vérifier que la combinaison appartient à l'utilisateur courant
 // Récupérer les catégories de l'utilisateur uniquement
