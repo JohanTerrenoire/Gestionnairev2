@@ -9,26 +9,40 @@ use App\Combinaison;
 
 class LiaisonController extends Controller
 {
-    public function getPartage(){
-      //Récupérer le mail de l'utilisateur connecté
-      $user = Auth::user();
+  // Obtenir la vue avec toutes les combinaisons qui sont partagées pour l'utilisateur
+  public function getPartage(){
+    //Récupérer le mail de l'utilisateur connecté
+    $user = Auth::user();
 
-      //Récupérer tous les partages liés à cet utilisateur
-      $query = Liaison::where('mail_partenaire', $user->email);
-      $liaisons = $query->get();
-      $combinaisons = [];
-      //Récupération des combinaisons dans la table de liaison
-      foreach ($liaisons as $liaison) {
-        $combinaisons[] = Combinaison::find($liaison->combinaison_id);
-      }
-      //Décryptage des mots de passe
-      foreach ($combinaisons as $combinaison) {
-        $combinaison->password = decrypt($combinaison->password);
-        $combinaison->isEditable = $combinaison->getLiaisonForUser(Auth::user())->isEditable;
-      }
-
-      return view('partage',[
-        'combinaisons' => $combinaisons
-      ]);
+    //Récupérer tous les partages liés à cet utilisateur
+    $query = Liaison::where('mail_partenaire', $user->email);
+    $liaisons = $query->get();
+    $combinaisons = [];
+    //Récupération des combinaisons dans la table de liaison
+    foreach ($liaisons as $liaison) {
+      $combinaisons[] = Combinaison::find($liaison->combinaison_id);
     }
+    //Décryptage des mots de passe
+    foreach ($combinaisons as $combinaison) {
+      $combinaison->password = decrypt($combinaison->password);
+      $combinaison->isEditable = $combinaison->getLiaisonForUser(Auth::user())->isEditable;
+    }
+
+    return view('partage',[
+      'combinaisons' => $combinaisons
+    ]);
+  }
+
+  //Obtenir un formulaire pour partager avec un partenaire la combinaison courante
+  public function getVueShareCombinaison($combinaison_id){
+    $combinaison = Combinaison::find($combinaison_id);
+    $combinaison->password = decrypt($combinaison->password);
+    return view('share', [
+      "combinaison" => $combinaison,
+    ]);
+  }
+
+  public function postUserShareCombinaison($combinaison_id){
+    
+  }
 }

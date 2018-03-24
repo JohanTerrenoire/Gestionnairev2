@@ -25,6 +25,7 @@
     <label for="page">Page</label>
     <input class="form-control" type="text" name="page" value="{{$combinaison->page}}" required>
   </div>
+  @yield('share')
   <div class="form-group">
     <input class="btn btn-success" type="submit" value="Valider">
   </div>

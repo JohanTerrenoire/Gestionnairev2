@@ -35,9 +35,9 @@ class CombinaisonController extends Controller
 
 
 
-  public function edit(Request $request ,$id = null){
-    if ($id) {
-      if(!$combinaison = Combinaison::find($id))
+  public function edit(Request $request ,$combinaison_id = null){
+    if ($combinaison_id) {
+      if(!$combinaison = Combinaison::find($combinaison_id))
         throw new \Exception("La combinaison n'existe pas.", 1);
     }
     else{
@@ -64,8 +64,6 @@ class CombinaisonController extends Controller
       ]);
     }
   }
-
-
 
 
   public function remove($id){
