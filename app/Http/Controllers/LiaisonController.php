@@ -38,11 +38,19 @@ class LiaisonController extends Controller
     $combinaison = Combinaison::find($combinaison_id);
     $combinaison->password = decrypt($combinaison->password);
     return view('share', [
-      "combinaison" => $combinaison,
+      "combinaison" => $combinaison
     ]);
   }
 
-  public function postUserShareCombinaison($combinaison_id){
-    
+  public function postUserShareCombinaison(Request $request, $combinaison_id){
+    $user = Auth::user();
+
+    $liaison = new Liaison();
+    $liaison->user_id = $user->id;
+    $liaison->mail_partenaire = $request->input('mail_partenaire');
+    $liaison->combinaison_id = $combinaison_id;
+    $liaison->isEditable = 1;
+    $liaison->save();
+    return redirect()->route('combinaison.index');
   }
 }

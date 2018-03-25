@@ -41,7 +41,7 @@
             <td>{{$combinaison->page}}</td>
             <td><a class="btn btn-outline-info" href="{{Route('combinaison.edit',['id' => $combinaison->id])}}">Modifier</a>
               <a class="btn btn-outline-danger" href="{{Route('combinaison.remove',['id' => $combinaison->id])}}">Supprimer</a>
-              <a class="btn btn-outline-success" href="">Partager</a>
+              <a class="btn btn-outline-success" href="{{Route('share', ['id' => $combinaison->id])}}">Partager</a>
             </td>
             </tr>
           @endforeach

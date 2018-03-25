@@ -36,4 +36,4 @@ Route::prefix('combinaison')->group(function(){
   Route::get('/delete/{id}', 'CombinaisonController@remove')->name('combinaison.remove')->middleware('auth');
 });
 // Lors de la modification, vérifier que la combinaison appartient à l'utilisateur courant
-// Récupérer les catégories de l'utilisateur uniquement
+// Ajouter un onglet pour voir les mots de passe que j'ai partagé avec d'autres
