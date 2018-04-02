@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Liaison;
 use App\Combinaison;
+use App\User;
 
 class LiaisonController extends Controller
 {
@@ -43,14 +44,20 @@ class LiaisonController extends Controller
   }
 
   public function postUserShareCombinaison(Request $request, $combinaison_id){
-    $user = Auth::user();
+    //Si le mail renseigné n'est pas dans la table des utilisateurs
+    if(User::where($request->input('mail_partenaire'))){
 
-    $liaison = new Liaison();
-    $liaison->user_id = $user->id;
-    $liaison->mail_partenaire = $request->input('mail_partenaire');
-    $liaison->combinaison_id = $combinaison_id;
-    $liaison->isEditable = 1;
-    $liaison->save();
-    return redirect()->route('combinaison.index');
+    }
+    //Si le mail renseigné est dans la table des inscrits
+    else {
+      $user = Auth::user();
+      $liaison = new Liaison();
+      $liaison->user_id = $user->id;
+      $liaison->mail_partenaire = $request->input('mail_partenaire');
+      $liaison->combinaison_id = $combinaison_id;
+      $liaison->isEditable = 1;
+      $liaison->save();
+      return redirect()->route('combinaison.index');
+    }
   }
 }
