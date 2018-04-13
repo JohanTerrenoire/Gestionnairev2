@@ -56,7 +56,12 @@ class LiaisonController extends Controller
         $liaison->user_id = $user->id;
         $liaison->mail_partenaire = $request->input('mail_partenaire');
         $liaison->combinaison_id = $combinaison_id;
-        $liaison->isEditable = 1;
+        if ($request->has('isEditable')) {
+          $liaison->isEditable = 1;
+        }
+        else {
+          $liaison->isEditable = 0;
+        }
         $liaison->save();
         return redirect()->route('combinaison.index');
       }
