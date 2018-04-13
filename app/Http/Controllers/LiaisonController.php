@@ -44,20 +44,26 @@ class LiaisonController extends Controller
   }
 
   public function postUserShareCombinaison(Request $request, $combinaison_id){
-    //Si le mail renseigné n'est pas dans la table des utilisateurs
-    if(User::where($request->input('mail_partenaire'))){
-
-    }
-    //Si le mail renseigné est dans la table des inscrits
-    else {
-      $user = Auth::user();
-      $liaison = new Liaison();
-      $liaison->user_id = $user->id;
-      $liaison->mail_partenaire = $request->input('mail_partenaire');
-      $liaison->combinaison_id = $combinaison_id;
-      $liaison->isEditable = 1;
-      $liaison->save();
-      return redirect()->route('combinaison.index');
+    try {
+      //Si le mail renseigné n'est pas dans la table des utilisateurs
+      if(!User::where('email', $request->input('mail_partenaire'))){
+        throw new \Exception("L'email doit être renseigné", 1);
+      }
+      //Si le mail renseigné est dans la table des inscrits
+      else {
+        $user = Auth::user();
+        $liaison = new Liaison();
+        $liaison->user_id = $user->id;
+        $liaison->mail_partenaire = $request->input('mail_partenaire');
+        $liaison->combinaison_id = $combinaison_id;
+        $liaison->isEditable = 1;
+        $liaison->save();
+        return redirect()->route('combinaison.index');
+      }
+    } catch (\Exception $e) {
+      $request->session()->flash('error', $e->getMessage());
+      return redirect()->route('share',[
+        "id" => $combinaison_id]);
     }
   }
 }
