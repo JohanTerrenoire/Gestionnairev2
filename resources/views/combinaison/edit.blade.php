@@ -7,23 +7,43 @@
   @csrf
   <div class="form-group">
     <label for="libelle">Libellé</label>
-    <input class="form-control" type="text" name="libelle" value="{{$combinaison->libelle}}" required>
+    @if(Route::current()->getName() == 'share')
+    <input class="form-control" type="text" name="libelle" value="{{$combinaison->libelle}}" disabled>
+    @else
+      <input class="form-control" type="text" name="libelle" value="{{$combinaison->libelle}}" required>
+    @endif
   </div>
   <div class="form-group">
     <label for="identifiant">Identifiant</label>
-    <input class="form-control" type="text" name="identifiant" value="{{$combinaison->identifiant}}" required>
+    @if(Route::current()->getName() == 'share')
+    <input class="form-control" type="text" name="identifiant" value="{{$combinaison->identifiant}}" required disabled>
+    @else
+      <input class="form-control" type="text" name="identifiant" value="{{$combinaison->identifiant}}" required>
+    @endif
   </div>
   <div class="form-group">
     <label for="url">URL</label>
-    <input class="form-control" type="text" name="url" value="{{$combinaison->url}}" required>
+    @if(Route::current()->getName() == 'share')
+    <input class="form-control" type="text" name="url" value="{{$combinaison->url}}" required disabled>
+    @else
+      <input class="form-control" type="text" name="url" value="{{$combinaison->url}}" required>
+    @endif
   </div>
   <div class="form-group">
     <label for="password">Mot de passe</label>
-    <input class="form-control" type="text" name="password" value="{{$combinaison->password}}" required>
+    @if(Route::current()->getName() == 'share')
+    <input class="form-control" type="text" name="password" value="{{$combinaison->password}}" required disabled>
+    @else
+      <input class="form-control" type="text" name="password" value="{{$combinaison->password}}" required>
+    @endif
   </div>
   <div class="form-group">
     <label for="page">Page</label>
-    <input class="form-control" type="text" name="page" value="{{$combinaison->page}}" required>
+    @if(Route::current()->getName() == 'share')
+    <input class="form-control" type="text" name="page" value="{{$combinaison->page}}" required disabled>
+    @else
+      <input class="form-control" type="text" name="page" value="{{$combinaison->page}}" required>
+    @endif
   </div>
   @yield('share')
   <div class="form-group">
