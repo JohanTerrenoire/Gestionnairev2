@@ -44,6 +44,7 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('combinaison.index') }}">Mes mots de passe</a>
+                                    <a class="dropdown-item "href="{{ route('partage.sharedPassword')}}">Mes mots de passe partagés</a>
                                     <a class="dropdown-item" href="{{ route('partage') }}">Partagés avec moi</a>
                                     <a class="dropdown-item" href="{{ route('generateur') }}">Générateur</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"

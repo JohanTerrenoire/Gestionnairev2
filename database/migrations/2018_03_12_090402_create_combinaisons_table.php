@@ -20,6 +20,8 @@ class CreateCombinaisonsTable extends Migration
             $table->string('url');
             $table->string('password');
             $table->string('page');
+            //Ajout du flag de partage
+            $table->boolean('isShare');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

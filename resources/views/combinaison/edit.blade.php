@@ -38,7 +38,7 @@
     @endif
   </div>
   <div class="form-group">
-    <label for="page">Page</label>
+    <label for="page">Catégorie</label>
     @if(Route::current()->getName() == 'share')
     <input class="form-control" type="text" name="page" value="{{$combinaison->page}}" required disabled>
     @else

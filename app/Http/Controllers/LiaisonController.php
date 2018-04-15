@@ -51,6 +51,7 @@ class LiaisonController extends Controller
       }
       //Si le mail renseigné est dans la table des inscrits
       else {
+        //Enregistrement du partage
         $user = Auth::user();
         $liaison = new Liaison();
         $liaison->user_id = $user->id;
@@ -63,6 +64,10 @@ class LiaisonController extends Controller
           $liaison->isEditable = 0;
         }
         $liaison->save();
+        //Ajout du flag isShare à l'enregistrement
+        $combinaison = Combinaison::find($combinaison_id);
+        $combinaison->isShare = 1;
+        $combinaison->save();
         return redirect()->route('combinaison.index');
       }
     } catch (\Exception $e) {
@@ -70,5 +75,34 @@ class LiaisonController extends Controller
       return redirect()->route('share',[
         "id" => $combinaison_id]);
     }
+  }
+
+  public function sharedPassword(){
+    /*********ERREUR ICI******************/
+    //Récupérer toutes les combinaisons partagées
+    $user = Auth::user();
+    $query = Liaison::where('user_id', "=", $user->id);//Les liaisons de l'utilisateurs courant partagées
+    $liaisons = $query->get();
+    foreach ($liaisons as $liaison) {
+      $combinaison = Combinaison::find($liaison->combinaison_id);
+      $liaison->libelle = $combinaison->libelle;
+      $liaison->categorie = $combinaison->page;
+      $liaison->url = $combinaison->url;
+    }
+    return view('sharedPassword', [
+      "liaisons" => $liaisons
+    ]);
+  }
+
+  public function stopPartage($liaison_id){
+    //Enlever le flag  isShare de la combinaison
+    $query = Liaison::where('id', "=", $liaison_id);
+    $liaison = $query->get();
+    $combinaison = Combinaison::find($liaison->combinaison_id);
+    $combinaison->isShare = 0;
+    $combinaison->save();
+    //Enlever la liaison de la base de données
+    Liaison::destroy($liaison_id);
+    return redirect()->route('combinaison.index');
   }
 }

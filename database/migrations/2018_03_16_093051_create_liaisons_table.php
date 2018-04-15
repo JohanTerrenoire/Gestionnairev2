@@ -21,7 +21,7 @@ class CreateLiaisonsTable extends Migration
             $table->boolean('isEditable');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('mail_partenaire')->references('email')->on('users');
-            $table->foreign('combinaison_id')->references('id')->on('combinaisons');
+            $table->foreign('combinaison_id')->references('id')->on('combinaisons')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -42,6 +42,7 @@ class CombinaisonController extends Controller
     }
     else{
       $combinaison = new Combinaison();
+      $combinaison->isShare = 0;
       $combinaison->user()->associate(Auth::user());
     }
 

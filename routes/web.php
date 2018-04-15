@@ -22,8 +22,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 // La route pour accéder au générateur de mot de passe aléatoire
 Route::view('/generateur', 'generateur')->name('generateur')->middleware('auth');
 
-// La route pour voir les Combinaisons partagées avec nous
-Route::get('/partage', 'LiaisonController@getPartage')->name('partage')->middleware('auth');
+// La route pour voir les Combinaisons partagées avec nous et celles que l'on a partagé
+Route::prefix('partage')->group(function(){
+  Route::get('/', 'LiaisonController@getPartage')->name('partage')->middleware('auth');
+  Route::get('/all', 'LiaisonController@sharedPassword')->name('partage.sharedPassword')->middleware('auth');
+  Route::get('/all/{id}', 'LiaisonController@stopPartage')->name('partage.stopPartage')->middleware('auth');
+});
 
 // La route pour partager un mot de passe avec un partenaire
 Route::get('/share/{id}', 'LiaisonController@getVueShareCombinaison')->name('share')->middleware('auth');
