@@ -17,19 +17,20 @@ class CombinaisonController extends Controller
 
   public function index(Request $request){
     $query  = Combinaison::where('user_id',Auth::id());
-    $user = Auth::user();
     if ($page = $request->input('page'))
       $query->where('page', $page);
 
-    $combinaisons = $query->get();
     //Décodage des mots de passe
-    foreach ($combinaisons as $combinaison) {
+    $finalCombinaisons = [];
+    foreach ($query->get() as $combinaison) {
       $combinaison->password = decrypt($combinaison->password);
+      if(!isset($finalCombinaisons[$combinaison->page]))
+        $finalCombinaisons[$combinaison->page] = [];
+      $finalCombinaisons[$combinaison->page][] = $combinaison;
     }
 
     return view('combinaison.index', [
-      "combinaisons"=> $combinaisons,
-      "pages" => Combinaison::getDistinctPage($user->id)
+      "finalCombinaisons" => $finalCombinaisons,
     ]);
   }
 
