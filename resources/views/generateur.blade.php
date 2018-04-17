@@ -24,7 +24,7 @@
       <div class="form-group">
         <label for="list_nb">Nombre de caractères :</label>
         <select name="list_nb" id="comboNbCaract">
-          @for ($i = 1; $i < 51; $i++)
+          @for ($i = 1; $i < 101; $i++)
             <option value="{{ $i }}">{{ $i }}</option>
           @endfor
         </select>
@@ -84,7 +84,6 @@ function generatePassword(){
   {
     chaine = chaine + ListeFinale[Math.floor(Math.random()*ListeCar.length)];
   }
-  console.log(ListeFinale);
   document.getElementById("generate_password").value = chaine;
 
 }

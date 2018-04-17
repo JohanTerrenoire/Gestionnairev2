@@ -18,41 +18,40 @@
     </form>
   </div>
 </div>
-<div class="row">
-  <div class="col">
-    <table class="table">
-      <thead class="thead-dark">
-        <tr>
-          <th>Libellé</th>
-          <th>Identifiant</th>
-          <th>Mot de passe</th>
-          <th>URL</th>
-          <th>Catégorie</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        @foreach ($combinaisons as $combinaison)
+
+<div class="table-responsive">
+      <table class="table table-striped table-dark">
+        <thead class="thead-dark">
           <tr>
-            <td>{{$combinaison->libelle}}
-            </td>
-            <td class="identifiant_field">{{$combinaison->identifiant}}</td>
-            <td class="password_field" data-value="{{$combinaison->password}}">***************</td>
-            <td> <a href="{{$combinaison->url}}" target="_blank">{{$combinaison->url}}</a> </td>
-            <td>{{$combinaison->page}}</td>
-            <td><a class="btn btn-outline-info" href="{{Route('combinaison.edit',['id' => $combinaison->id])}}">Modifier</a>
-              <a class="btn btn-outline-danger" href="{{Route('combinaison.remove',['id' => $combinaison->id])}}">Supprimer</a>
-              <a class="btn btn-outline-success" href="{{Route('share', ['id' => $combinaison->id])}}">Partager</a>
-                @if ($combinaison->isShare)
-                <img src="{{ asset('img/share.png')}}" height="20px"/>
-                @endif
-            </td>
-            </tr>
-          @endforeach
-        </tbody>
-      </table>
-      <a class="btn btn-outline-info" href="{{Route('combinaison.edit')}}">Ajouter</a>
-  </div>
+            <th>Libellé</th>
+            <th>Identifiant</th>
+            <th>Mot de passe</th>
+            <th>URL</th>
+            <th>Catégorie</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach ($combinaisons as $combinaison)
+            <tr>
+              <td>{{$combinaison->libelle}}
+              </td>
+              <td class="identifiant_field">{{$combinaison->identifiant}}</td>
+              <td class="password_field" data-value="{{$combinaison->password}}">***************</td>
+              <td> <a href="{{$combinaison->url}}" target="_blank">{{$combinaison->url}}</a> </td>
+              <td>{{$combinaison->page}}</td>
+              <td><a class="btn btn-outline-info" href="{{Route('combinaison.edit',['id' => $combinaison->id])}}">Modifier</a>
+                <a class="btn btn-outline-danger" href="{{Route('combinaison.remove',['id' => $combinaison->id])}}">Supprimer</a>
+                <a class="btn btn-outline-success" href="{{Route('share', ['id' => $combinaison->id])}}">Partager</a>
+                  @if ($combinaison->isShare)
+                  <img src="{{ asset('img/share.png')}}" height="20px"/>
+                  @endif
+              </td>
+              </tr>
+            @endforeach
+          </tbody>
+        </table>
+        <a class="btn btn-outline-info" href="{{Route('combinaison.edit')}}">Ajouter</a>
 </div>
 @endsection
 
