@@ -3,45 +3,43 @@
 @section('title', 'Générateur')
 
 @section('content')
-  <fieldset>
-    <legend>Générer un mot de passe</legend>
-    <form>
-      <div class="form-group">
-        <input name="withMajuscules" type="checkbox" id="checkbox_majuscules">
-        <label for="withMajuscules">Avec des majuscules</label>
+    <h3>Générer un mot de passe</h3><br/>
+    <div class="row">
+      <div class="col-md">
+        <div class="form-group">
+          <label for="list_nb">Nombre de caractères :</label>
+          <select name="list_nb" id="comboNbCaract">
+            @for ($i = 1; $i < 101; $i++)
+              <option value="{{ $i }}">{{ $i }}</option>
+            @endfor
+          </select>
+        </div>
+        <div class="form-group">
+          <input name="withMajuscules" type="checkbox" id="checkbox_majuscules">
+          <label for="withMajuscules">Avec des majuscules</label>
+        </div>
+
+        <div class="form-group">
+          <input name="withSpecial" type="checkbox" id="checkbox_speciaux">
+          <label for="withSpecial">Avec des caractères spéciaux</label>
+        </div>
+
+        <div class="form-group">
+          <input name="withInt" type="checkbox" id="checkbox_int">
+          <label for="withInt">Avec des caractères chiffres</label>
+        </div>
       </div>
-
-      <div class="form-group">
-        <input name="withSpecial" type="checkbox" id="checkbox_speciaux">
-        <label for="withSpecial">Avec des caractères spéciaux</label>
+      <div class="col-md">
+        <div class="form-group">
+          <label for="gen_mdp">Votre mot de passe : </label>
+          <input type="text" id="generate_password" name="gen_mdp" class="form-control">
+        </div>
+        <div class="form-group">
+          <input type="button" onclick="generatePassword()" value="Valider" class="btn btn-info">
+        </div>
       </div>
+    </div>
 
-      <div class="form-group">
-        <input name="withInt" type="checkbox" id="checkbox_int">
-        <label for="withInt">Avec des caractères chiffres</label>
-      </div>
-
-      <div class="form-group">
-        <label for="list_nb">Nombre de caractères :</label>
-        <select name="list_nb" id="comboNbCaract">
-          @for ($i = 1; $i < 101; $i++)
-            <option value="{{ $i }}">{{ $i }}</option>
-          @endfor
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="gen_mdp">Votre mot de passe : </label>
-        <input type="text" id="generate_password" name="gen_mdp" class="form-control">
-      </div>
-
-
-      <div class="form-group">
-        <input type="button" onclick="generatePassword()" value="Valider" class="btn btn-info">
-      </div>
-
-    </form>
-  </fieldset>
 @endsection
 
 

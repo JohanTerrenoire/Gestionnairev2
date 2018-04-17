@@ -96,11 +96,15 @@ class LiaisonController extends Controller
 
   public function stopPartage($liaison_id){
     //Enlever le flag  isShare de la combinaison
-    $query = Liaison::where('id', "=", $liaison_id);
+    $liaison = Liaison::find($liaison_id);
+    //Si la combinaison est encore référencée dans une liaison, laisser le flag isShare
+    $query = Liaison::where('combinaison_id', "=", $liaison->combinaison_id);
     $liaison = $query->get();
-    $combinaison = Combinaison::find($liaison->combinaison_id);
-    $combinaison->isShare = 0;
-    $combinaison->save();
+    if (!$liaison) {
+      $combinaison = Combinaison::find($liaison->combinaison_id);
+      $combinaison->isShare = 0;
+      $combinaison->save();
+    }
     //Enlever la liaison de la base de données
     Liaison::destroy($liaison_id);
     return redirect()->route('combinaison.index');
