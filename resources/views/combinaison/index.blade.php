@@ -7,7 +7,7 @@
       <ul class="nav nav-tabs nav-pills" id="myTab" role="tablist">
         @foreach($finalCombinaisons as $page => $combinaisons)
           <li class="nav-item">
-            <a class="nav-link {{ ($loop->first) ? 'active' : '' }}" id="tab-{{ $page }}" data-toggle="tab" href="#{{ $page }}" role="tab" aria-controls="{{ $page }}" {{ ($loop->first) ? 'aria-selected="true"' : '' }}>{{ $page }}</a>
+            <a class="nav-link {{ ($loop->first) ? 'active' : '' }}" id="tab-{{ hash('crc32b',$page) }}" data-toggle="tab" href="#{{ hash('crc32b',$page) }}" role="tab" aria-controls="{{ hash('crc32b',$page) }}" {{ ($loop->first) ? 'aria-selected="true"' : '' }}>{{ $page }}</a>
           </li>
         @endforeach
       </ul>
@@ -15,7 +15,7 @@
     <div class="row">
       <div class="tab-content" id="myTabContent" style="width: 100%">
         @foreach($finalCombinaisons as $page => $combinaisons)
-          <div class="tab-pane fade {{ ($loop->first) ? 'show active' : '' }} " id="{{ $page }}" role="tabpanel" aria-labelledby="tab-{{ $page }}">
+          <div class="tab-pane fade {{ ($loop->first) ? 'show active' : '' }} " id="{{ hash('crc32b',$page) }}" role="tabpanel" aria-labelledby="tab-{{ hash('crc32b',$page) }}">
             <div class="table-responsive">
               <table class="table table-striped">
                 <thead class="thead-dark">
