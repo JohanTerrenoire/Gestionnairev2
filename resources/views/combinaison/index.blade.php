@@ -44,11 +44,10 @@
                         <img src="{{ asset('img/share.png')}}" height="20px"/>
                         @endif
                     </td>
-                    </tr>
-                  @endforeach
-                </tbody>
-              </table>
-              <a class="btn btn-outline-info" href="{{Route('combinaison.edit')}}">Ajouter</a>
+                  </tr>
+                @endforeach
+              </tbody>
+            </table>
           </div>
         </div>
     @endforeach

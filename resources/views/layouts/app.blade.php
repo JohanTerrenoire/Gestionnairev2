@@ -43,7 +43,7 @@
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('combinaison.edit') }}">Ajouter un mot de passe</a>
+                                    <a class="dropdown-item" href="{{ route('combinaison.edit') }}">Nouveau mot de passe</a>
                                     <a class="dropdown-item" href="{{ route('combinaison.index') }}">Mes mots de passe</a>
                                     <a class="dropdown-item "href="{{ route('partage.sharedPassword')}}">Mes mots de passe partagés</a>
                                     <a class="dropdown-item" href="{{ route('partage') }}">Partagés avec moi</a>
