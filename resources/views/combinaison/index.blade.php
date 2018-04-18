@@ -54,7 +54,7 @@
       </div>
     </div>
   @else
-    <div class="row">
+    <div class="alert alert-info">
       <h4>Vous n'avez pas de mots de passe enregistrés pour le moment</h4>
     </div>
   @endif
