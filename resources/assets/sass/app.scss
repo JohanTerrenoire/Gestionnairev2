@@ -4,6 +4,7 @@
 
 // Variables
 @import "variables";
+$color_black : #212529;
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
@@ -11,4 +12,26 @@
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+.nav-pills
+{
+  .nav-link
+  {
+    &.active
+    {
+      background-color: $color_black;
+      border-color: $color_black;
+    }
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    color: $color_black;
+  }
+}
+.nav-tabs
+{
+  border-bottom: 0px;
+}
+.table th
+{
+  border-top: 0px;
 }

@@ -4,7 +4,7 @@
 @section('combinaison_content')
 <div class="row">
   {{--  La barre de navigation entre les catégories --}}
-  <ul class="nav nav-tabs" id="myTab" role="tablist">
+  <ul class="nav nav-tabs nav-pills" id="myTab" role="tablist">
     @foreach($finalCombinaisons as $page => $combinaisons)
       <li class="nav-item">
         <a class="nav-link {{ ($loop->first) ? 'active' : '' }}" id="tab-{{ $page }}" data-toggle="tab" href="#{{ $page }}" role="tab" aria-controls="{{ $page }}" {{ ($loop->first) ? 'aria-selected="true"' : '' }}>{{ $page }}</a>
