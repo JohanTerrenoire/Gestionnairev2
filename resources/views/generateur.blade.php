@@ -9,7 +9,7 @@
         <div class="form-group">
           <label for="list_nb">Nombre de caractères :</label>
           <select name="list_nb" id="comboNbCaract">
-            @for ($i = 1; $i < 101; $i++)
+            @for ($i = 6; $i < 101; $i++)
               <option value="{{ $i }}">{{ $i }}</option>
             @endfor
           </select>
