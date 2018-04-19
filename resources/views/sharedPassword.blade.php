@@ -3,30 +3,34 @@
 @section('title', 'Partagé avec d\'autres')
 
 @section('content')
-  <div class="table-responsive">
-    <table class="table table-striped table-dark">
-      <thead class="thead-dark">
-        <tr>
-          <th>Libellé</th>
-          <th>URL</th>
-          <th>Catégorie</th>
-          <th>Email du partenaire</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        @foreach ($liaisons as $liaison)
-
+  @if (!$liaisons)
+    <div class="alert alert-info">
+      <h4>Vous n'avez partagé aucun de vos mots de passe</h4>
+    </div>
+  @else
+    <div class="table-responsive">
+      <table class="table table-striped table-dark">
+        <thead class="thead-dark">
           <tr>
-            <td>{{$liaison->libelle}}</td>
-            <td><a href="{{$liaison->url}}">{{$liaison->url}}</a></td>
-            <td>{{$liaison->categorie}}</td>
-            <td>{{$liaison->mail_partenaire}}</td>
-            <td><a class="btn btn-outline-danger" href="{{Route('partage.stopPartage',['id' => $liaison->id])}}">Stopper le partage</a></td>
+            <th>Libellé</th>
+            <th>URL</th>
+            <th>Catégorie</th>
+            <th>Email du partenaire</th>
+            <th>Actions</th>
           </tr>
-
-        @endforeach
-      </tbody>
-    </table>
-  </div>
+        </thead>
+        <tbody>
+          @foreach ($liaisons as $liaison)
+            <tr>
+              <td>{{$liaison->libelle}}</td>
+              <td><a href="{{$liaison->url}}">{{$liaison->url}}</a></td>
+              <td>{{$liaison->categorie}}</td>
+              <td>{{$liaison->mail_partenaire}}</td>
+              <td><a class="btn btn-outline-danger" href="{{Route('partage.stopPartage',['id' => $liaison->id])}}">Stopper le partage</a></td>
+            </tr>
+          @endforeach
+        </tbody>
+      </table>
+    </div>
+  @endif
 @endsection

@@ -78,7 +78,6 @@ class LiaisonController extends Controller
   }
 
   public function sharedPassword(){
-    /*********ERREUR ICI******************/
     //Récupérer toutes les combinaisons partagées
     $user = Auth::user();
     $query = Liaison::where('user_id', "=", $user->id);//Les liaisons de l'utilisateurs courant partagées
