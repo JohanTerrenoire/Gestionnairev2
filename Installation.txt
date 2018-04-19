@@ -1,7 +1,7 @@
 -----------------------------------Pré-requis-----------------------------------
 
 Installer php7.1, mysql, php7.1-mysql et composer
-(Si il y a encore des erreurs, il peut manquer des paquets donc vérifier les erreurs)
+(Si il y a encore des erreurs, il peut manquer des paquets donc vérifier les erreurs et installer les paquets manquants)
 
 ----------------------------Procédure d'installation----------------------------
 
@@ -11,15 +11,18 @@ $ git clone https://github.com/JohanTerrenoire/Gestionnairev2
 Dans le répertoire de clone, lancer l'installation via composer
 $ composer install
 
-Lancer la migration
+Lancer la migration (avant de la lancer, passer à la configuration de la base de données)
 $ php artisan migrate
 
-Lancer la génération de la clé de l'application
+Lancer la génération de la clé de l'application (Elle sert pour le cryptage)
 $ php artisan key:generate
 
 ---------------------------------Configuration----------------------------------
 
-Dans mysql, créer une base projet_web
+Dans mysql, créer une base projet_web et un utilisateur pour l'application disposant
+de tous les droits sur cette base de données.
 
 Copier le fichier .env.example et le renommer en .env
+
 Changer les modalités d'accès à la base mysql par celles configurées sur le serveur mysql
+en utilisant l'utilisateur créé précédement
